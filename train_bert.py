@@ -44,7 +44,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 # -----------------------------
 #tokenize
 # -----------------------------
-tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+tokenizer = BertTokenizer.from_pretrained(
+    "./base-bert",
+    local_files_only=True
+)
+
 
 train_encodings = tokenizer(
     X_train.tolist(),
@@ -88,7 +92,11 @@ test_loader = DataLoader(test_dataset, batch_size=8, shuffle=False)
 #  Load BERT model
 # -----------------------------
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
+model = BertForSequenceClassification.from_pretrained(
+    "./base-bert",
+    num_labels=2,
+    local_files_only=True
+)
 model.to(device)
 
 optimizer = AdamW(model.parameters(), lr=5e-5)

@@ -14,8 +14,6 @@ SAFE_DOMAINS = {
     "openai.com"
 }
 
-MODEL_PATH = "bert-phishing-model"
-TOKENIZER_PATH = "bert-phishing-tokenizer"
 MAX_LEN = 64
 PHISHING_THRESHOLD = 0.6  # confidence threshold
 
@@ -24,8 +22,16 @@ PHISHING_THRESHOLD = 0.6  # confidence threshold
 # -----------------------------
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-tokenizer = BertTokenizer.from_pretrained(TOKENIZER_PATH)
-model = BertForSequenceClassification.from_pretrained(MODEL_PATH)
+tokenizer = BertTokenizer.from_pretrained(
+    "./bert-phishing-tokenizer",
+    local_files_only=True
+)
+
+model = BertForSequenceClassification.from_pretrained(
+    "./bert-phishing-model",
+    local_files_only=True
+)
+
 model.to(device)
 model.eval()
 

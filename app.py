@@ -3,9 +3,16 @@ import torch
 from transformers import BertTokenizer, BertForSequenceClassification
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+tokenizer = BertTokenizer.from_pretrained(
+    "./bert-phishing-tokenizer",
+    local_files_only=True
+)
 
-tokenizer = BertTokenizer.from_pretrained("bert-phishing-tokenizer")
-model = BertForSequenceClassification.from_pretrained("bert-phishing-model")
+model = BertForSequenceClassification.from_pretrained(
+    "./bert-phishing-model",
+    local_files_only=True
+)
+
 model.to(device)
 model.eval()
 
