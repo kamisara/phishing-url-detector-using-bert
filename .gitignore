@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+
+# Data
+data/*.csv
+
+# ML models (too big for GitHub)
+bert-phishing-model/
+bert-phishing-tokenizer/
+
+# HuggingFace cache
+.cache/
+
+# OS
+.DS_Store
+Thumbs.db
